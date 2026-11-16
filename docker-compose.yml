@@ -1,0 +1,22 @@
+# Optional: a local PostgreSQL database, so that you can develop and demo against
+# the same database engine that is used in production.
+#
+#   docker compose up -d db
+#
+# then put this line into backend/.env :
+#   DATABASE_URL=postgres://attendance:attendance@localhost:5432/attendance
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: attendance
+      POSTGRES_PASSWORD: attendance
+      POSTGRES_DB: attendance
+    ports:
+      - "5432:5432"
+    volumes:
+      - attendance_pgdata:/var/lib/postgresql/data
+
+volumes:
+  attendance_pgdata:
